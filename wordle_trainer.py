@@ -28,6 +28,7 @@ def counting_sort(arr, position):
 
     return sorted_arr
 
+
 def radix_sort(arr):
     word_length = len(arr[0])
 
@@ -36,3 +37,34 @@ def radix_sort(arr):
 
     return sorted_arr
 
+def right_binary_search(arr, target):
+    lo = 0
+    hi = len(arr)
+
+    while (lo < hi - 1):
+        mid = (lo + hi) //2
+        if target >= arr[mid]:
+            lo = mid
+        elif target < arr[mid]:
+            hi = mid
+    
+    if arr[lo] == target:
+        return lo
+    
+    return False
+
+def left_binary_search(arr, target):
+    lo = 0
+    hi = len(arr)
+
+    while (lo < hi - 1):
+        mid = (lo + hi) //2
+        if target > arr[mid]:
+            lo = mid
+        elif target <= arr[mid]:
+            hi = mid
+    
+    if arr[hi] == target:
+        return hi
+    
+    return False
