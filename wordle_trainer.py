@@ -1,12 +1,13 @@
-def counting_sort(arr):
-    # extracting the Unicode code of the minimum and maximum letter in the array and using that to determine the required length of the count_arr where we will store the count of each letter
-    min_val = ord(min(arr))
-    max_val = ord(max(arr))
+def counting_sort(arr, position):
+    # creating a counting array of length 26 for each of the 26 characters using the ord() function to get the Unicode codes
+    min_val = ord('a')
+    max_val = ord('z')
     val_range = max_val - min_val + 1
     count_arr = [0]*val_range
 
-    # storing the count of each element in input arr in count_arr
-    for letter in arr:
+    # storing the count of each element in input arr in count_arr using the Unicode code of the letter at the position in the string element in arr
+    for word in arr:
+        letter = word[position]
         count_arr[ord(letter)-min_val] += 1
 
     # changing count_arr to store the positions of the last element of a specific key in the sorted array (i.e if at count_arr[1] = 5 then the last occurence of the letter represented at index 1 in sorted_arr will be at index 4)
@@ -19,9 +20,12 @@ def counting_sort(arr):
     length = len(arr)
     sorted_arr = [0]*length
     for i in range(length-1, -1, -1):
-        n = ord(arr[i])
-        sorted_arr[count_arr[n-min_val]-1] = chr(n)
+        word = arr[i]
+        letter = word[position]
+        n = ord(letter)
+        sorted_arr[count_arr[n-min_val]-1] = word
         count_arr[n-min_val] -= 1
 
     return sorted_arr
+
 
