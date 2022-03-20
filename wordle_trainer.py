@@ -28,4 +28,11 @@ def counting_sort(arr, position):
 
     return sorted_arr
 
+def radix_sort(arr):
+    word_length = len(arr[0])
+
+    for i in range(word_length-1, -1, -1):
+        sorted_arr = counting_sort(arr, i)
+
+    return sorted_arr
 
