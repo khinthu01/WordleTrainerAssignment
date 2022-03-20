@@ -1,3 +1,6 @@
+from numpy import sort
+
+
 def counting_sort(arr, position):
     # creating a counting array of length 26 for each of the 26 characters using the ord() function to get the Unicode codes
     min_val = ord('a')
@@ -35,11 +38,27 @@ def radix_sort(arr):
 
     for i in range(word_length-1, -1, -1):
         sorted_arr = counting_sort(sorted_arr, i)
-        print(sorted_arr)
 
     return sorted_arr
 
-def binary_search(arr, target):
+def right_binary_search(arr, target):
+    lo = 0
+    hi = len(arr)
+
+    while (lo < hi - 1):
+        mid = (lo + hi) //2
+        word = arr[mid]
+        if target >= word[1]:
+            lo = mid
+        elif target < word[1]:
+            hi = mid
+
+    if arr[lo][1] == target:
+        return lo
+    
+    return False
+
+def left_binary_search(arr, target):
     lo = 0
     hi = len(arr)
 
@@ -48,27 +67,70 @@ def binary_search(arr, target):
         word = arr[mid]
         if target > word[1]:
             lo = mid
-        elif target < word[1]:
+        elif target <= word[1]:
             hi = mid
-        elif target == word[1]:
-            return mid
+        
+
+    if arr[lo][1] == target:
+        return lo
     
     return False
 
 def trainer(wordlist, word, marker):
+    if marker == [1]*len(marker):
+        return [word]
+
     tuple_list = []
 
     for elem in wordlist:
         elem.lower()
-        key = sorted(elem)
+        key = "".join(sorted(elem))
         tuple_list.append((elem, key))
 
     #radix_sort
-    sorted_list = radix_sort(wordlist)
+    sorted_list = radix_sort(tuple_list)
+
+    #getting list of anagrams
+    anagram = "".join(sorted(word))
+    left_anagram = left_binary_search(sorted_list, anagram)
+    right_anagram = right_binary_search(sorted_list, anagram)
+
+    anagrams = sorted_list[left_anagram:right_anagram+1]
+    anagram_words = []
+
+    for elem in anagrams: 
+        anagram_words.append(elem[0])
+
+    valid_anagrams = []
+
+    #eliminating them if they have values in certain spots
+    for i in range(len(marker)):
+        for j in range(len(anagram_words)):
+            if marker[i] == 0 and anagram_words[j][i] != word[i]:
+                valid_anagrams.append(anagram_words[j])
+            if marker[i] == 1 and anagram_words[j][i] == word[i]:
+                valid_anagrams.append(anagram_words[j])
+        
+        anagram_words = valid_anagrams
+        valid_anagrams = []
+    
+    return anagram_words
 
 
-li = [('pears', 'aeprs'), ('apple','aelpp'), ('ablet', 'abelt'), ('parse', 'aeprs')]
 
 
-print(radix_sort(li))
+# li = [('pears', 'aeprs'), ('apple','aelpp'), ('ablet', 'abelt'), ('parse', 'aeprs')]
 
+
+# print(radix_sort(li))
+
+# sorted_li = radix_sort(li)
+# print(right_binary_search(sorted_li, 'aeprs'))
+# print(left_binary_search(sorted_li, 'aeprs'))
+
+wordlist = ["limes", "spare", "store", "pares",
+"pears", "stare", "spear", "parse", "reaps"]
+word = "pares"
+marker = [1, 0, 0, 0, 1]
+
+print(trainer(wordlist, word, marker))
