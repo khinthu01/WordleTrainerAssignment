@@ -1,3 +1,6 @@
+from sympy import rad
+
+
 def counting_sort(arr, position):
     # creating a counting array of length 26 for each of the 26 characters using the ord() function to get the Unicode codes
     min_val = ord('a')
@@ -37,34 +40,44 @@ def radix_sort(arr):
 
     return sorted_arr
 
-def right_binary_search(arr, target):
+def right_binary_search(arr, target, position):
     lo = 0
     hi = len(arr)
 
     while (lo < hi - 1):
         mid = (lo + hi) //2
-        if target >= arr[mid]:
+        word = arr[mid]
+        if ord(target) >= ord(word[position]):
             lo = mid
-        elif target < arr[mid]:
+        elif ord(target) < ord(word[position]):
             hi = mid
     
-    if arr[lo] == target:
+    lo_word = arr[lo]
+    if lo_word[position] == target:
         return lo
     
     return False
 
-def left_binary_search(arr, target):
+def left_binary_search(arr, target, position):
     lo = 0
     hi = len(arr)
 
     while (lo < hi - 1):
         mid = (lo + hi) //2
-        if target > arr[mid]:
+        word = arr[mid]
+        if ord(target) > ord(word[position]):
             lo = mid
-        elif target <= arr[mid]:
+        elif ord(target) <= ord(word[position]):
             hi = mid
     
-    if arr[hi] == target:
+    hi_word = arr[hi]
+    if hi_word[position] == target:
         return hi
     
     return False
+
+def trainer(wordlist, word, marker):
+    sorted_list = radix_sort(wordlist)
+
+    for i in range(len(marker)):
+        if marker[i] == 0:
