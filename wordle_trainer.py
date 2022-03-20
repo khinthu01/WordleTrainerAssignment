@@ -1,6 +1,3 @@
-from sympy import rad
-
-
 def counting_sort(arr, position):
     # creating a counting array of length 26 for each of the 26 characters using the ord() function to get the Unicode codes
     min_val = ord('a')
@@ -10,7 +7,7 @@ def counting_sort(arr, position):
 
     # storing the count of each element in input arr in count_arr using the Unicode code of the letter at the position in the string element in arr
     for word in arr:
-        letter = word[position]
+        letter = word[1][position]
         count_arr[ord(letter)-min_val] += 1
 
     # changing count_arr to store the positions of the last element of a specific key in the sorted array (i.e if at count_arr[1] = 5 then the last occurence of the letter represented at index 1 in sorted_arr will be at index 4)
@@ -24,7 +21,7 @@ def counting_sort(arr, position):
     sorted_arr = [0]*length
     for i in range(length-1, -1, -1):
         word = arr[i]
-        letter = word[position]
+        letter = word[1][position]
         n = ord(letter)
         sorted_arr[count_arr[n-min_val]-1] = word
         count_arr[n-min_val] -= 1
@@ -40,44 +37,32 @@ def radix_sort(arr):
 
     return sorted_arr
 
-def right_binary_search(arr, target, position):
+def binary_search(arr, target, position):
     lo = 0
     hi = len(arr)
 
     while (lo < hi - 1):
         mid = (lo + hi) //2
         word = arr[mid]
-        if ord(target) >= ord(word[position]):
+        if ord(target) > ord(word[1][position]):
             lo = mid
-        elif ord(target) < ord(word[position]):
+        elif ord(target) < ord(word[1][position]):
             hi = mid
-    
-    lo_word = arr[lo]
-    if lo_word[position] == target:
-        return lo
-    
-    return False
-
-def left_binary_search(arr, target, position):
-    lo = 0
-    hi = len(arr)
-
-    while (lo < hi - 1):
-        mid = (lo + hi) //2
-        word = arr[mid]
-        if ord(target) > ord(word[position]):
-            lo = mid
-        elif ord(target) <= ord(word[position]):
-            hi = mid
-    
-    hi_word = arr[hi]
-    if hi_word[position] == target:
-        return hi
+        elif ord(target) == ord(word[1][position]):
+            return mid
     
     return False
 
 def trainer(wordlist, word, marker):
+    tuple_list = []
+
+    for elem in wordlist:
+        elem.lower()
+        key = sorted(elem)
+        tuple_list.append((elem, key))
+
+    #radix_sort
     sorted_list = radix_sort(wordlist)
 
-    for i in range(len(marker)):
-        if marker[i] == 0:
+
+    
