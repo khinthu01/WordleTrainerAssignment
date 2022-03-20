@@ -1,3 +1,6 @@
+# code for Task 1 in Assignment 1
+# This file contains the python code for a Wordle Trainer
+
 def counting_sort(arr, position):
     # creating a counting array of length 26 for each of the 26 characters using the ord() function to get the Unicode codes
     min_val = ord('a')
