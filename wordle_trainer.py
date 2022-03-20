@@ -30,10 +30,12 @@ def counting_sort(arr, position):
 
 
 def radix_sort(arr):
-    word_length = len(arr[0])
+    word_length = len(arr[0][0])
+    sorted_arr = arr
 
     for i in range(word_length-1, -1, -1):
-        sorted_arr = counting_sort(arr, i)
+        sorted_arr = counting_sort(sorted_arr, i)
+        print(sorted_arr)
 
     return sorted_arr
 
@@ -67,6 +69,6 @@ def trainer(wordlist, word, marker):
 
 li = [('pears', 'aeprs'), ('apple','aelpp'), ('ablet', 'abelt'), ('parse', 'aeprs')]
 
-print(counting_sort(li))
+
 print(radix_sort(li))
 
