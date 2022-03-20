@@ -37,18 +37,18 @@ def radix_sort(arr):
 
     return sorted_arr
 
-def binary_search(arr, target, position):
+def binary_search(arr, target):
     lo = 0
     hi = len(arr)
 
     while (lo < hi - 1):
         mid = (lo + hi) //2
         word = arr[mid]
-        if ord(target) > ord(word[1][position]):
+        if target > word[1]:
             lo = mid
-        elif ord(target) < ord(word[1][position]):
+        elif target < word[1]:
             hi = mid
-        elif ord(target) == ord(word[1][position]):
+        elif target == word[1]:
             return mid
     
     return False
@@ -65,4 +65,8 @@ def trainer(wordlist, word, marker):
     sorted_list = radix_sort(wordlist)
 
 
-    
+li = [('pears', 'aeprs'), ('apple','aelpp'), ('ablet', 'abelt'), ('parse', 'aeprs')]
+
+print(counting_sort(li))
+print(radix_sort(li))
+
