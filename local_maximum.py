@@ -1,3 +1,6 @@
+import random
+
+
 def get_neighbours(matrix, row, col):
 
     neighbours = []
@@ -88,12 +91,4 @@ def local_maximum(matrix):
             corner_4 = coord_4
 
 
-M = [[1, 2, 27, 28, 29, 30, 22],
-[3, 4, 25, 26, 31, 32, 35],
-[5, 6, 23, 24, 33, 34, 47],
-[7, 8, 21, 49, 46, 36, 48],
-[9, 10, 19, 20, 37, 38, 45],
-[11, 12, 17, 18, 39, 40, 44],
-[13, 14, 15, 16, 41, 42, 43]]
 
-print(local_maximum(M))

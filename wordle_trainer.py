@@ -7,7 +7,7 @@ def counting_sort(arr, position):
     '''
     This function sorts an array of strings in a non-decreasing order based on the letter at position using a non-comparison sorting algorithm.
 
-    :param arr: an array of strings are the same length and all characters are letters of the English alphabet
+    :param arr: an array of strings that are all the same length and all characters are letters of the English alphabet
     :param position: position of the letter in the string that the array is supposed to sort on. For example, if position is 5 then the function will sort based on the sixth letter in all string elements in arr.
 
     :returns: a sorted array
@@ -48,15 +48,38 @@ def counting_sort(arr, position):
 
 
 def radix_sort(arr):
+    '''
+    This function sorts an array of strings in alphabetical order using a non-comparison sorting algorithm called radix sort. 
+
+    :param arr: an array of strings that are all the same length and all characters are letters of the English alphabet
+
+    :returns: a sorted array
+
+    :time complexity: counting_sort has a time complexity of O(n) where n is the length of arr and it is called m times where m is the length of the strings stored in arr. Hence the worst-case time complexity is O(n*m)
+    :space complexity: radix_sort has a space complexity of O(n) where n is the length of arr. 
+    '''
+
     word_length = len(arr[0][0])
     sorted_arr = arr
 
+    # sorts the array by iterating through each position in the string elements and sorting the array based on that position
     for i in range(word_length-1, -1, -1):
         sorted_arr = counting_sort(sorted_arr, i)
 
     return sorted_arr
 
 def right_binary_search(arr, target):
+    '''
+    This function searches for the rightmost target in an array of tuples which contains a word and its key (all the letters in the word arranged in alphabetical order). The search is done based on the key which is at index 1 in each tuple.
+
+    :param arr: an array of tuples with a word and its key (string, string). The word is located at index 0 in each tuple and the key which is all the word's letters in alphabetical order is located at index 1 in each tuple
+    :param target: a string that represents the key being searched for. The target MUST be in the input array, arr. 
+
+    :returns: returns the index of the rightmost target
+
+    :time complexity: counting_sort has a time complexity of O(n*k) where n is the length of arr and k is the number of different letters in the alphabet. Since k is constant at 26 this results in an overall worst-case time complexity of O(n).
+    :space complexity: counting_sort has a space complexity of O(n) where n is the length of the sorted array which equals to the length of arr. 
+    '''
     lo = 0
     hi = len(arr)
 
@@ -71,7 +94,6 @@ def right_binary_search(arr, target):
     if arr[lo][1] == target:
         return lo
     
-    return False
 
 def left_binary_search(arr, target):
     lo = 0
@@ -89,9 +111,20 @@ def left_binary_search(arr, target):
     if arr[lo][1] == target:
         return lo
     
-    return False
 
 def sort_word(word):
+    '''
+    This function sorts letters in the input word in alphabetical order. 
+
+    :param arr: an array of strings that are all the same length and all characters are letters of the English alphabet
+    :param position: position of the letter in the string that the array is supposed to sort on. For example, if position is 5 then the function will sort based on the sixth letter in all string elements in arr.
+
+    :returns: a sorted array
+
+    :time complexity: counting_sort has a time complexity of O(n*k) where n is the length of arr and k is the number of different letters in the alphabet. Since k is constant at 26 this results in an overall worst-case time complexity of O(n).
+    :space complexity: counting_sort has a space complexity of O(n) where n is the length of the sorted array which equals to the length of arr. 
+    '''
+
     # creating a counting array of length 26 for each of the 26 characters using the ord() function to get the Unicode codes
     min_val = ord('a')
     max_val = ord('z')
@@ -169,21 +202,3 @@ def trainer(wordlist, word, marker):
 
 
 
-
-# li = [('pears', 'aeprs'), ('apple','aelpp'), ('ablet', 'abelt'), ('parse', 'aeprs')]
-
-
-# print(radix_sort(li))
-
-# sorted_li = radix_sort(li)
-# print(right_binary_search(sorted_li, 'aeprs'))
-# print(left_binary_search(sorted_li, 'aeprs'))
-
-wordlist = ["limes", "spare", "store", "pares",
-"pears", "stare", "spear", "parse", "reaps"]
-word = "pares"
-marker = [1, 0, 0, 0, 1]
-
-print(trainer(wordlist, word, marker))
-
-print(sort_word('pares'))
