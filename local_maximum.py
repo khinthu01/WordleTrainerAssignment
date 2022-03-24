@@ -1,3 +1,8 @@
+# code for Task 2 in Assignment 1
+# This file contains the python code for a function that identifies a local maximum in an n*n matrix
+# Author: Khin Moe Thu Kyaw
+# Student Id: 28751639
+
 def get_neighbours(matrix, row, col):
     '''
     This function takes a n*n matrix and the row and column values and evaluates the neighbours that the element at the particular row and column has. 
