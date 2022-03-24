@@ -1,8 +1,16 @@
-import random
-
-
 def get_neighbours(matrix, row, col):
+    '''
+    This function takes a n*n matrix and the row and column values and evaluates the neighbours that the element at the particular row and column has. 
 
+    :param matrix: n*n matrix
+    :param row: the row at which the target element is located
+    :param col: the column at which the target element is located
+
+    :returns: a list of tuples where all the tuples are coordinates of all the neighbours of the target element. The neighbours are elements immediately to the left, to the right, above and below the target element
+
+    :time complexity: O(1) 
+    :space complexity: O(1)
+    '''
     neighbours = []
     n = len(matrix)
 
@@ -56,8 +64,8 @@ def get_local_max(matrix, coords):
     return max_coords
 
 
-def local_maximum(matrix):
-    n = len(matrix)
+def local_maximum(M):
+    n = len(M)
     
     corner_1 = (0,0)
     corner_2 = (0, n-1)
@@ -65,28 +73,28 @@ def local_maximum(matrix):
     corner_4 = (n-1, n-1)
 
     for i in range(n):
-        coord_1 = get_local_max(matrix, corner_1)
-        coord_2 = get_local_max(matrix, corner_2)
-        coord_3 = get_local_max(matrix, corner_3)
-        coord_4 = get_local_max(matrix, corner_4)
+        coord_1 = get_local_max(M, corner_1)
+        coord_2 = get_local_max(M, corner_2)
+        coord_3 = get_local_max(M, corner_3)
+        coord_4 = get_local_max(M, corner_4)
 
         if coord_1 == corner_1:
-            return corner_1
+            return [coord_1[0], coord_1[1]]
         else:
             corner_1 = coord_1
 
         if coord_2 == corner_2:
-            return corner_2
+            return [coord_2[0], coord_2[1]]
         else:
             corner_2 = coord_2
         
         if coord_3 == corner_3:
-            return corner_3
+            return [coord_3[0], coord_3[1]]
         else:
             corner_3 = coord_3
 
         if coord_4 == corner_4:
-            return corner_4
+            return [coord_4[0], coord_4[1]]
         else:
             corner_4 = coord_4
 
