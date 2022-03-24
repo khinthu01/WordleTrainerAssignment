@@ -1,7 +1,21 @@
 # code for Task 1 in Assignment 1
 # This file contains the python code for a Wordle Trainer
+# Author: Khin Moe Thu Kyaw
+# Student Id: 28751639
 
 def counting_sort(arr, position):
+    '''
+    This function sorts an array of strings in a non-decreasing order based on the letter at position using a non-comparison sorting algorithm.
+
+    :param arr: an array of strings are the same length and all characters are letters of the English alphabet
+    :param position: position of the letter in the string that the array is supposed to sort on. For example, if position is 5 then the function will sort based on the sixth letter in all string elements in arr.
+
+    :returns: a sorted array
+
+    :time complexity: counting_sort has a time complexity of O(n*k) where n is the length of arr and k is the number of different letters in the alphabet. Since k is constant at 26 this results in an overall worst-case time complexity of O(n).
+    :space complexity: counting_sort has a space complexity of O(n) where n is the length of the sorted array which equals to the length of arr. 
+    '''
+
     # creating a counting array of length 26 for each of the 26 characters using the ord() function to get the Unicode codes
     min_val = ord('a')
     max_val = ord('z')
@@ -10,6 +24,7 @@ def counting_sort(arr, position):
 
     # storing the count of each element in input arr in count_arr using the Unicode code of the letter at the position in the string element in arr
     for word in arr:
+        word = word.lower()
         letter = word[1][position]
         count_arr[ord(letter)-min_val] += 1
 

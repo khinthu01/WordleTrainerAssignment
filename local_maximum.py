@@ -1,4 +1,3 @@
-
 def get_neighbours(matrix, row, col):
 
     neighbours = []
